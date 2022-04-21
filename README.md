@@ -14,7 +14,7 @@ The [main branch](https://github.com/finagle/finatra-kafka/tree/main) in Github 
 
 ## Features
 
--   Intuitive [DSL](https://github.com/finagle/finatra-kafka/tree/main/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/dsl) for topology creation, compatible with the [Kafka Streams DSL](https://kafka.apache.org/21/documentation/streams/developer-guide/dsl-api.html)
+-   Intuitive [DSL](https://github.com/finagle/finatra-kafka/tree/main/kafka-streams/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/dsl) for topology creation, compatible with the [Kafka Streams DSL](https://kafka.apache.org/21/documentation/streams/developer-guide/dsl-api.html)
 -   Full Kafka Streams metric integration, exposed as [TwitterServer Metrics](https://twitter.github.io/twitter-server/Features.html#metrics)
 -   [RocksDB integration](#rocksdb)
 -   [Queryable State](#queryable-state)
@@ -22,12 +22,12 @@ The [main branch](https://github.com/finagle/finatra-kafka/tree/main) in Github 
 
 ## Basics
 
-With [KafkaStreamsTwitterServer](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/KafkaStreamsTwitterServer.scala),
+With [KafkaStreamsTwitterServer](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/KafkaStreamsTwitterServer.scala),
 a fully functional service can be written by simply configuring the Kafka Streams Builder via the `configureKafkaStreams()` lifecycle method. See the [examples](#examples) section.
 
 ### Transformers
 
-Implement custom [transformers](https://kafka.apache.org/21/javadoc/org/apache/kafka/streams/kstream/Transformer.html) using [FinatraTransformer](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/transformer/FinatraTransformer.scala).
+Implement custom [transformers](https://kafka.apache.org/21/javadoc/org/apache/kafka/streams/kstream/Transformer.html) using [FinatraTransformer](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/transformer/FinatraTransformer.scala).
 
 #### Aggregations
 
@@ -51,14 +51,14 @@ See how the queryable state is used in the following [example](#queryable-state)
 
 #### Queryable Stores
 
-> -   [QueryableFinatraKeyValueStore](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/query/QueryableFinatraKeyValueStore.scala)
-> -   [QueryableFinatraWindowStore](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/query/QueryableFinatraWindowStore.scala)
-> -   [QueryableFinatraCompositeWindowStore](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/query/QueryableFinatraCompositeWindowStore.scala)
+> -   [QueryableFinatraKeyValueStore](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/query/QueryableFinatraKeyValueStore.scala)
+> -   [QueryableFinatraWindowStore](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/query/QueryableFinatraWindowStore.scala)
+> -   [QueryableFinatraCompositeWindowStore](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/query/QueryableFinatraCompositeWindowStore.scala)
 
 
 ## Examples
 
-The [integration tests](https://github.com/finagle/finatra-kafka/tree/main/kafka-streams/src/test/scala/com/twitter/finatra/kafkastreams/integration) serve as a good collection of example Finatra Kafka Streams servers.
+The [integration tests](https://github.com/finagle/finatra-kafka/tree/main/kafka-streams/kafka-streams/src/test/scala/com/twitter/finatra/kafkastreams/integration) serve as a good collection of example Finatra Kafka Streams servers.
 
 Word Count Server
 -----------------
@@ -110,7 +110,7 @@ In this example, `WordCountQueryService` is an underlying Thrift service.
 
 ## Testing
 
-Finatra Kafka Streams includes tooling that simplifies the process of writing highly testable services. See [TopologyFeatureTest](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/src/test/scala/com/twitter/finatra/kafkastreams/test/TopologyFeatureTest.scala), which includes a [FinatraTopologyTester](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/src/test/scala/com/twitter/finatra/kafkastreams/test/FinatraTopologyTester.scala) that integrates Kafka Streams' [TopologyTestDriver](https://kafka.apache.org/21/javadoc/org/apache/kafka/streams/TopologyTestDriver.html) with a [KafkaStreamsTwitterServer](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/KafkaStreamsTwitterServer.scala).
+Finatra Kafka Streams includes tooling that simplifies the process of writing highly testable services. See [TopologyFeatureTest](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/kafka-streams/src/test/scala/com/twitter/finatra/kafkastreams/test/TopologyFeatureTest.scala), which includes a [FinatraTopologyTester](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/kafka-streams/src/test/scala/com/twitter/finatra/kafkastreams/test/FinatraTopologyTester.scala) that integrates Kafka Streams' [TopologyTestDriver](https://kafka.apache.org/21/javadoc/org/apache/kafka/streams/TopologyTestDriver.html) with a [KafkaStreamsTwitterServer](https://github.com/finagle/finatra-kafka/blob/main/kafka-streams/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/KafkaStreamsTwitterServer.scala).
 
 ## License
 
