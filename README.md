@@ -4,13 +4,13 @@
 [![Codecov](https://codecov.io/gh/finagle/finatra-kafka/branch/main/graph/badge.svg)](https://codecov.io/gh/finagle/finatra-kafka)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.twitter/finatra-kafka_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.twitter/finatra-kafka_2.12)
 
-Finatra has native integration with [Kafka Streams](https://kafka.apache.org/documentation/streams) to easily build Kafka Streams applications on top of a [TwitterServer](https://github.com/twitter/twitter-server).
+Finatra integration with [Kafka Streams](https://kafka.apache.org/documentation/streams) to easily build Kafka Streams applications on top of a [TwitterServer](https://github.com/twitter/twitter-server).
 
 > **Note**: Versions of finatra-kafka and finatra-kafka-streams that are published against Scala 2.12 use Kafka 2.2, versions of that are published against Scala 2.13 use Kafka 2.5. This simplified cross-version support is ephemeral until we can drop Kafka 2.2.
 
 ## Development version
 
-The [main branch](https://github.com/finagle/finatra-kafka/tree/develop) in Github tracks the latest code which is updated every week. If you want to contribute a patch or fix, please use this branch as the basis of your [Pull Request](https://help.github.com/articles/creating-a-pull-request/).
+The [main branch](https://github.com/finagle/finatra-kafka/tree/main) in Github tracks the latest code. If you want to contribute a patch or fix, please use this branch as the basis of your [Pull Request](https://help.github.com/articles/creating-a-pull-request/).
 
 ## Features
 
