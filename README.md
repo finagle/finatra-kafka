@@ -6,11 +6,11 @@ Finatra has native integration with [Kafka Streams](https://kafka.apache.org/doc
 
 ## Development version
 
-The [develop branch](https://github.com/twitter/finatra/tree/develop) in Github tracks the latest code which is updated every week. If you want to contribute a patch or fix, please use this branch as the basis of your [Pull Request](https://help.github.com/articles/creating-a-pull-request/).
+The [main branch](https://github.com/finagle/finatra-kafka/tree/develop) in Github tracks the latest code which is updated every week. If you want to contribute a patch or fix, please use this branch as the basis of your [Pull Request](https://help.github.com/articles/creating-a-pull-request/).
 
 ## Features
 
--   Intuitive [DSL](https://github.com/twitter/finatra/tree/develop/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/dsl) for topology creation, compatible with the [Kafka Streams DSL](https://kafka.apache.org/21/documentation/streams/developer-guide/dsl-api.html)
+-   Intuitive [DSL](https://github.com/finagle/finatra-kafka/tree/develop/kafka-streams/src/main/scala/com/twitter/finatra/kafkastreams/dsl) for topology creation, compatible with the [Kafka Streams DSL](https://kafka.apache.org/21/documentation/streams/developer-guide/dsl-api.html)
 -   Full Kafka Streams metric integration, exposed as [TwitterServer Metrics](https://twitter.github.io/twitter-server/Features.html#metrics)
 -   [RocksDB integration](#rocksdb)
 -   [Queryable State](#queryable-state)
@@ -54,7 +54,7 @@ See how the queryable state is used in the following [example](#queryable-state)
 
 ## Examples
 
-The [integration tests](https://github.com/twitter/finatra/tree/develop/kafka-streams/src/test/scala/com/twitter/finatra/kafkastreams/integration) serve as a good collection of example Finatra Kafka Streams servers.
+The [integration tests](https://github.com/finagle/finatra-kafka/tree/develop/kafka-streams/src/test/scala/com/twitter/finatra/kafkastreams/integration) serve as a good collection of example Finatra Kafka Streams servers.
 
 Word Count Server
 -----------------
