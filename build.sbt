@@ -309,7 +309,10 @@ lazy val kafka = (project in file("kafka"))
       "com.twitter" %% "finagle-core" % versions.twLibVersion,
       "com.twitter" %% "finagle-exp" % versions.twLibVersion,
       "com.twitter" %% "finagle-thrift" % versions.twLibVersion,
+      "com.twitter" %% "inject-app" % versions.twLibVersion % "test->test",
       "com.twitter" %% "inject-core" % versions.twLibVersion % "test->test;compile->compile",
+      "com.twitter" %% "inject-modules" % versions.twLibVersion % "test->test",
+      "com.twitter" %% "inject-server" % versions.twLibVersion % "test->test",
       "com.twitter" %% "inject-utils" % versions.twLibVersion % "test->test;compile->compile",
       "com.twitter" %% "finatra-jackson" % versions.twLibVersion% "test->test",
       "com.twitter" %% "finatra-utils" % versions.twLibVersion % "test->test;compile->compile",
@@ -472,7 +475,9 @@ lazy val kafkaStreams = (project in file("kafka-streams/kafka-streams"))
     },
     Test / excludeDependencies ++= kafkaStreamsExclusionRules,
     excludeDependencies ++= kafkaStreamsExclusionRules,
-    Test / publishArtifact := true
+    Test / publishArtifact := true,
+    Test / scroogeThriftIncludeFolders := Seq(file("src/test/thrift")),
+    Test / scroogeLanguages := Seq("scala")
   ).dependsOn(
     kafka % "test->test;compile->compile",
     kafkaStreamsQueryableThriftClient % "test->test;compile->compile"
