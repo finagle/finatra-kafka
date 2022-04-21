@@ -1,4 +1,8 @@
-# Finatra Kafka & Kafka Streams [![status: unmaintained](https://opensource.twitter.dev/status/unmaintained.svg)](https://opensource.twitter.dev/status/#unmaintained)
+# Finatra Kafka & Kafka Streams
+[![status: unmaintained](https://opensource.twitter.dev/status/unmaintained.svg)](https://opensource.twitter.dev/status/#unmaintained)
+[![Build Status](https://github.com/finagle/finatra-kafka/workflows/continuous%20integration/badge.svg?branch=main)](https://github.com/finagle/finatra-kafka/actions/workflows/ci.yml?query=workflow%3A%22continuous+integration%22+branch%3A%22main%22+)
+[![Codecov](https://codecov.io/gh/finagle/finatra-kafka/branch/develop/graph/badge.svg)](https://codecov.io/gh/finagle/finatra-kafka)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.twitter/finatra-kafka_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.twitter/finatra-kafka_2.12)
 
 Finatra has native integration with [Kafka Streams](https://kafka.apache.org/documentation/streams) to easily build Kafka Streams applications on top of a [TwitterServer](https://github.com/twitter/twitter-server).
 

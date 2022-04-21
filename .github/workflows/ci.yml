@@ -12,8 +12,7 @@ defaults:
 on:
   push:
     branches:
-      - develop
-      - release
+      - main
   pull_request:
 
 jobs:
