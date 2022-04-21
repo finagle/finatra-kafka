@@ -5,6 +5,7 @@ env:
   TRAVIS: "true" # pretend we're TravisCI
   SBT_VERSION: 1.6.1
   BUILD_VERSION: "v1" # bump this if builds are failing due to a bad cache
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 defaults:
   run:
