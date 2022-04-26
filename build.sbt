@@ -63,6 +63,27 @@ def jdk11GcJavaOptions: Seq[String] = {
   )
 }
 
+def travisTestJavaOptions: Seq[String] = {
+  // When building on travis-ci, we want to suppress logging to error level only.
+  // https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+  val travisBuild = sys.env.getOrElse("TRAVIS", "false").toBoolean
+  if (travisBuild) {
+    Seq(
+      "-DSKIP_FLAKY=true",
+      "-DSKIP_FLAKY_TRAVIS=true",
+      "-Dorg.slf4j.simpleLogger.defaultLogLevel=off",
+      "-Dcom.twitter.inject.test.logging.disabled",
+      // Needed to avoid cryptic EOFException crashes in forked tests
+      // in Travis with `sudo: false`.
+      // See https://github.com/sbt/sbt/issues/653
+      // and https://github.com/travis-ci/travis-ci/issues/3775
+      "-Xmx3G"
+    )
+  } else {
+    Seq("-DSKIP_FLAKY=true")
+  }
+}
+
 lazy val versions = new {
   // All Twitter library releases are date versioned as YY.MM.patch
   val twLibVersion = "22.4.0"
@@ -112,7 +133,7 @@ lazy val projectSettings = Seq(
   crossScalaVersions := Seq("2.12.12", "2.13.6"),
   scalaModuleInfo := scalaModuleInfo.value.map(_.withOverrideScalaVersion(true)),
   Test / fork := true, // We have to fork to get the JavaOptions
-  Test / javaOptions ++= Seq("-DSKIP_FLAKY=true", "-Dorg.slf4j.simpleLogger.defaultLogLevel=off"),
+  Test / javaOptions ++= travisTestJavaOptions,
   libraryDependencies += scalaCollectionCompat,
   resolvers ++= Seq(
     Resolver.sonatypeRepo("releases"),

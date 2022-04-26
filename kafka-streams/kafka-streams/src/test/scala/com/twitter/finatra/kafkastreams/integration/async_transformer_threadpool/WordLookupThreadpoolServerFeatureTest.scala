@@ -8,7 +8,7 @@ import com.twitter.inject.server.EmbeddedTwitterServer
 import com.twitter.util.Try
 import org.apache.kafka.common.serialization.Serdes
 
-class WordLookupThreadpoolServerFeatureTestBase extends KafkaStreamsFeatureTest {
+class WordLookupThreadpoolServerFeatureTest extends KafkaStreamsFeatureTest {
 
   private val numberOfWords = 30
 
