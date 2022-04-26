@@ -5,22 +5,25 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 Global / excludeLintKeys += scalacOptions
 Global / concurrentRestrictions += Tags.limit(Tags.Test, 1)
 
-// All Twitter library releases are date versioned as YY.MM.patch
-val releaseVersion = "22.5.0-SNAPSHOT"
-
-lazy val buildSettings = Seq(
-  version := releaseVersion,
-  scalaVersion := "2.13.6",
-  crossScalaVersions := Seq("2.12.12", "2.13.6"),
-  scalaModuleInfo := scalaModuleInfo.value.map(_.withOverrideScalaVersion(true)),
-  Test / fork := true, // We have to fork to get the JavaOptions
-  Test / javaOptions ++= travisTestJavaOptions,
-  libraryDependencies += scalaCollectionCompat
-)
-
-lazy val noPublishSettings = Seq(
-  publish / skip := true
-)
+inThisBuild(List(
+  organization := "org.finagle",
+  homepage := Some(url("https://github.com/finagle/finatra-kafka")),
+  licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+  developers := List(
+    Developer(
+      "cacoco",
+      "Christopher Coco",
+      "ccoco@twitter.com",
+      url("https://opensource.twitter.dev/")
+    ),
+    Developer(
+      "scosenza",
+      "Steve Cosenza",
+      "scosenza@twitter.com",
+      url("https://opensource.twitter.dev/")
+    )
+  )
+))
 
 def gcJavaOptions: Seq[String] = {
   val javaVersion = System.getProperty("java.version")
@@ -82,10 +85,6 @@ def travisTestJavaOptions: Seq[String] = {
 }
 
 lazy val versions = new {
-  // When building on travis-ci, querying for the branch name via git commands
-  // will return "HEAD", because travis-ci checks out a specific sha.
-  val travisBranch = sys.env.getOrElse("TRAVIS_BRANCH", "")
-
   // All Twitter library releases are date versioned as YY.MM.patch
   val twLibVersion = "22.4.0"
 
@@ -94,15 +93,12 @@ lazy val versions = new {
   val junit = "4.12"
   val kafka24 = "2.4.1"
   val kafka25 = "2.5.0"
-  val logback = "1.2.8"
   val rocksdbjni = "5.14.2"
   val scalaCheck = "1.15.4"
-  val scalaGuice = "4.2.11"
   val scalaTest = "3.1.2"
   val scalaTestPlusJunit = "3.1.2.0"
   val scalaTestPlusScalaCheck = "3.1.2.0"
   val slf4j = "1.7.30"
-  val scalaCollectionCompat = "2.1.2"
 }
 
 lazy val scalaCollectionCompat = "org.scala-lang.modules" %% "scala-collection-compat" % "2.1.2"
@@ -132,7 +128,13 @@ lazy val testDependenciesSettings = Seq(
   )
 )
 
-lazy val baseSettings = Seq(
+lazy val projectSettings = Seq(
+  scalaVersion := "2.13.6",
+  crossScalaVersions := Seq("2.12.12", "2.13.6"),
+  scalaModuleInfo := scalaModuleInfo.value.map(_.withOverrideScalaVersion(true)),
+  Test / fork := true, // We have to fork to get the JavaOptions
+  Test / javaOptions ++= travisTestJavaOptions,
+  libraryDependencies += scalaCollectionCompat,
   resolvers ++= Seq(
     Resolver.sonatypeRepo("releases"),
     Resolver.sonatypeRepo("snapshots")
@@ -155,78 +157,6 @@ lazy val baseSettings = Seq(
   }
 )
 
-lazy val publishSettings = Seq(
-  publishMavenStyle := true,
-  publishConfiguration := publishConfiguration.value.withOverwrite(true),
-  publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true),
-  Compile / publishArtifact := true,
-  Test / publishArtifact := false,
-  pomIncludeRepository := { _ => false },
-  publishTo := {
-    val nexus = "https://oss.sonatype.org/"
-    if (isSnapshot.value)
-      Some("snapshots" at nexus + "content/repositories/snapshots")
-    else
-      Some("releases" at nexus + "service/local/staging/deploy/maven2")
-  },
-  licenses := Seq("Apache 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0")),
-  homepage := Some(url("https://github.com/twitter/finatra")),
-  autoAPIMappings := true,
-  apiURL := Some(url("https://twitter.github.io/finatra/scaladocs/")),
-  pomExtra :=
-    <scm>
-      <url>git://github.com/twitter/finatra.git</url>
-      <connection>scm:git://github.com/twitter/finatra.git</connection>
-    </scm>
-    <developers>
-      <developer>
-        <id>twitter</id>
-        <name>Twitter Inc.</name>
-        <url>https://www.twitter.com/</url>
-      </developer>
-    </developers>,
-  pomPostProcess := { node: scala.xml.Node =>
-    val rule: scala.xml.transform.RewriteRule = new scala.xml.transform.RewriteRule {
-      override def transform(n: scala.xml.Node): scala.xml.NodeSeq =
-        n.nameToString(new StringBuilder()).toString() match {
-          case "dependency" if (n \ "groupId").text.trim == "org.scoverage" => Nil
-          case _ => n
-        }
-    }
-
-    new scala.xml.transform.RuleTransformer(rule).transform(node).head
-  },
-  Compile / resourceGenerators += Def.task {
-    val dir = (Compile / resourceManaged).value
-    val file = dir / "com" / "twitter" / name.value / "build.properties"
-    val buildRev = scala.sys.process.Process("git" :: "rev-parse" :: "HEAD" :: Nil).!!.trim
-    val buildName = new java.text.SimpleDateFormat("yyyyMMdd-HHmmss").format(new java.util.Date)
-    val contents =
-      s"name=${name.value}\nversion=${version.value}\nbuild_revision=$buildRev\nbuild_name=$buildName"
-    IO.write(file, contents)
-    Seq(file)
-  }.taskValue
-)
-
-lazy val projectSettingNoTestDependencies = baseSettings ++ buildSettings ++ publishSettings ++ Seq(
-  organization := "com.twitter"
-)
-
-lazy val projectSettings = projectSettingNoTestDependencies ++ testDependenciesSettings
-
-lazy val baseServerSettings = baseSettings ++ buildSettings ++ publishSettings ++ Seq(
-  organization := "com.twitter",
-  publishArtifact := false,
-  publishLocal := {},
-  publish := {},
-  assembly / assemblyMergeStrategy := {
-    case "META-INF/io.netty.versions.properties" => MergeStrategy.last
-    case PathList(ps @ _*) if ps.last endsWith ".class" => MergeStrategy.first
-    case other => MergeStrategy.defaultMergeStrategy(other)
-  }
-)
-
-
 def aggregatedProjects = Seq[sbt.ProjectReference](
   kafka,
   kafkaStreams,
@@ -242,11 +172,7 @@ def mappingContainsAnyPath(mapping: (File, String), paths: Seq[String]): Boolean
 
 lazy val root = (project in file("."))
   .enablePlugins(ScalaUnidocPlugin)
-  .settings(baseSettings)
-  .settings(buildSettings)
-  .settings(noPublishSettings)
   .settings(
-    organization := "com.twitter",
     moduleName := "root",
     ScalaUnidoc / unidoc / unidocProjectFilter := inAnyProject
   ).aggregate(aggregatedProjects: _*)
@@ -485,7 +411,7 @@ lazy val kafkaStreams = (project in file("kafka-streams/kafka-streams"))
 
 lazy val site = (project in file("doc"))
   .enablePlugins(SphinxPlugin)
-  .settings(baseSettings ++ buildSettings ++ Seq(
+  .settings(projectSettings++ Seq(
     doc / scalacOptions ++= Seq("-doc-title", "Finatra", "-doc-version", version.value),
     Sphinx / includeFilter := ("*.html" | "*.png" | "*.svg" | "*.js" | "*.css" | "*.gif" | "*.txt")
   ))

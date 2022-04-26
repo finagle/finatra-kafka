@@ -7,6 +7,7 @@
 .history
 .idea/
 .lib
+.bsp/
 dist/
 lib_managed/
 out/
