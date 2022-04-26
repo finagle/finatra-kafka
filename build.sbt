@@ -6,7 +6,7 @@ Global / excludeLintKeys += scalacOptions
 Global / concurrentRestrictions += Tags.limit(Tags.Test, 1)
 
 inThisBuild(List(
-  organization := "org.finagle",
+  organization := "com.github.finagle",
   homepage := Some(url("https://github.com/finagle/finatra-kafka")),
   licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
   developers := List(
