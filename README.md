@@ -1,9 +1,3 @@
-#Annoucement
-
-Finatra-kafka was migrated out of finatra core library as a stand-alone project in 2022. Currently, Twitter has no plans to develop, maintain or support finatra-kafka in any form in the future.
-If your organization is interested in maintaining this framework, please file an issue or open a discussion to engage the community
-
-
 # Finatra Kafka & Kafka Streams
 [![status: unmaintained](https://opensource.twitter.dev/status/unmaintained.svg)](https://opensource.twitter.dev/status/#unmaintained)
 [![Build Status](https://github.com/finagle/finatra-kafka/workflows/continuous%20integration/badge.svg?branch=main)](https://github.com/finagle/finatra-kafka/actions/workflows/ci.yml?query=workflow%3A%22continuous+integration%22+branch%3A%22main%22+)
@@ -13,6 +7,11 @@ If your organization is interested in maintaining this framework, please file an
 Finatra integration with [Kafka Streams](https://kafka.apache.org/documentation/streams) to easily build Kafka Streams applications on top of a [TwitterServer](https://github.com/twitter/twitter-server).
 
 > **Note**: Versions of finatra-kafka and finatra-kafka-streams that are published against Scala 2.12 use Kafka 2.2, versions of that are published against Scala 2.13 use Kafka 2.5. This simplified cross-version support is ephemeral until we can drop Kafka 2.2.
+
+#Announcement
+
+Finatra-kafka was migrated out of finatra core library as a stand-alone project in 2022. Currently, Twitter has no plans to develop, maintain or support finatra-kafka in any form in the future.
+If your organization is interested in maintaining this framework, please file an issue or open a discussion to engage the community.
 
 ## Development version
 
