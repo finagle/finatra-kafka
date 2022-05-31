@@ -1,3 +1,9 @@
+#Annoucement
+
+Finatra-kafka was migrated out of finatra core library as a stand-alone project in 2022. Currently, Twitter has no plans to develop, maintain or support finatra-kafka in any form in the future.
+If your organization is interested in maintaining this framework, please file an issue or open a discussion to engage the community
+
+
 # Finatra Kafka & Kafka Streams
 [![status: unmaintained](https://opensource.twitter.dev/status/unmaintained.svg)](https://opensource.twitter.dev/status/#unmaintained)
 [![Build Status](https://github.com/finagle/finatra-kafka/workflows/continuous%20integration/badge.svg?branch=main)](https://github.com/finagle/finatra-kafka/actions/workflows/ci.yml?query=workflow%3A%22continuous+integration%22+branch%3A%22main%22+)
