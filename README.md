@@ -10,7 +10,7 @@ Finatra integration with [Kafka Streams](https://kafka.apache.org/documentation/
 
 #Announcement
 
-Finatra-kafka was migrated out of finatra core library as a stand-alone project in 2022. Currently, Twitter has no plans to develop, maintain or support finatra-kafka in any form in the future.
+Finatra-Kafka was migrated out of Finatra core library as a stand-alone project in 2022. Currently, Twitter has no plans to develop, maintain or support Finatra-Kafka in any form in the future.
 If your organization is interested in maintaining this framework, please file an issue or open a discussion to engage the community.
 
 ## Development version
