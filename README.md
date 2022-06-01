@@ -8,6 +8,11 @@ Finatra integration with [Kafka Streams](https://kafka.apache.org/documentation/
 
 > **Note**: Versions of finatra-kafka and finatra-kafka-streams that are published against Scala 2.12 use Kafka 2.2, versions of that are published against Scala 2.13 use Kafka 2.5. This simplified cross-version support is ephemeral until we can drop Kafka 2.2.
 
+#Announcement
+
+Finatra-Kafka was migrated out of Finatra core library as a stand-alone project in 2022. Currently, Twitter has no plans to develop, maintain or support Finatra-Kafka in any form in the future.
+If your organization is interested in maintaining this framework, please file an issue or open a discussion to engage the community.
+
 ## Development version
 
 The [main branch](https://github.com/finagle/finatra-kafka/tree/main) in Github tracks the latest code. If you want to contribute a patch or fix, please use this branch as the basis of your [Pull Request](https://help.github.com/articles/creating-a-pull-request/).
